@@ -9,9 +9,11 @@ use App\Models\Category;
 class Service extends Model
 {
     use HasFactory;
+    
     protected $guarded = [];
 
-    public function categories(){
-        $this->hasMany(Category::class);
+    public function categories()
+    {
+        return $this->hasMany(Category::class);
     }
 }

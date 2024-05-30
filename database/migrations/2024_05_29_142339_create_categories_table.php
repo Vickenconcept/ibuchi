@@ -16,7 +16,6 @@ return new class extends Migration
             $table->foreignId('service_id');
             $table->string('name');
             $table->text('description');
-            $table->json('duty')->nullable();
             $table->timestamps();
         });
     }
