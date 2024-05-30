@@ -2,41 +2,28 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ServiceRequest;
 use App\Models\Service;
 use Illuminate\Http\Request;
 
 class ServiceController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        return view('service.index');
-    }
-
-    /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        //
+        return view('services.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ServiceRequest $request)
     {
-        //
-    }
+        Service::create($request->validated());
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Service $service)
-    {
-        //
+        return to_route('dashboard')->with('success', 'Service added successfully!');
     }
 
     /**
@@ -44,7 +31,7 @@ class ServiceController extends Controller
      */
     public function edit(Service $service)
     {
-        //
+        return view('services.edit', compact(['service']));
     }
 
     /**
@@ -52,7 +39,9 @@ class ServiceController extends Controller
      */
     public function update(Request $request, Service $service)
     {
-        //
+        $service->update($request->all());
+
+        return to_route('dashboard')->with('success', 'Service updated successfully!');
     }
 
     /**
@@ -60,6 +49,8 @@ class ServiceController extends Controller
      */
     public function destroy(Service $service)
     {
-        //
+        $service->delete();
+
+        return back()->with('success', 'Service deleted successfully!');
     }
 }

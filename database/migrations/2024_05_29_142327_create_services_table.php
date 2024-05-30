@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('services', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->enum('type',['cleaning','task'])->default('cleaning');
+            $table->longText('description');
+            $table->enum('type',['cleaning','task']);
             $table->timestamps();
         });
     }
