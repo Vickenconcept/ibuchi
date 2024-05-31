@@ -19,6 +19,7 @@ class ServiceFactory extends Factory
         return [
             'name' => fake()->name(),
             'type' => fake()->randomElement(['cleaning', 'task']),
+            'description' => fake()->sentence(),
         ];
     }
 }
