@@ -21,9 +21,9 @@ class ServiceController extends Controller
      */
     public function store(ServiceRequest $request)
     {
-        Service::create($request->validated());
+        $service = Service::create($request->validated());
 
-        return to_route('dashboard')->with('success', 'Service added successfully!');
+        return to_route('dashboard')->with('success', ucfirst($service->type) . ' added successfully!');
     }
 
     /**
@@ -41,7 +41,7 @@ class ServiceController extends Controller
     {
         $service->update($request->all());
 
-        return to_route('dashboard')->with('success', 'Service updated successfully!');
+        return to_route('dashboard')->with('success', ucfirst($service->type) . ' updated successfully!');
     }
 
     /**
