@@ -2,6 +2,7 @@
     <div class=" text-gray-700" x-data="{ page: 'page-1', cleaningType: null, openTask: null }">
         {{-- @include('layouts.navigation') --}}
 
+
         <section style="display: none" x-show="page === 'page-1'" class="px-3 md:px-10 space-y-7 py-10">
             <div class="flex justify-between space-x-3">
                 <div class="w-full bg-cyan-800 rounded-full h-2 "></div>
@@ -47,12 +48,11 @@
 
             @if (session()->has('error'))
                 <div class="alert alert-danger">
-                    {{-- {{ session('error') }} --}}
                     <p class="text-xs font-semibold text-red-400">You can select ont type of cleaning and
                         extra tasks</p>
                 </div>
             @endif
-            <form class="space-y-1" wire:submit.prevent="submit" id="form">
+            <form class="space-y-1"  id="form">
                 @foreach ($services as $service)
                     <div class="bg-white border-gray-200 px-5  border hover:shadow-md shadow-sm rounded-md ">
                         <div class="flex items-center justify-between   rounded cursor-pointer "
@@ -61,7 +61,7 @@
                             @click="cleaningType = @js($service->name)">
                             <label for="{{ $service->id }}"
                                 class="w-full py-4 ms-2 text-sm font-medium text-gray-900 ">{{ $service->name }}</label>
-                            <input id="{{ $service->id }}" type="checkbox" value="" name="cleaning"
+                            <input wire:click="checkStatus('{{ $service->id }}', '{{ $service->type }}', '{{ $service->name }}');" id="{{ $service->id }}" type="checkbox" value="" name="cleaning"
                                 @if (in_array($service->id, array_column($selectedTypes, 'id'))) checked @endif
                                 class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-500 rounded focus:ring-blue-500  focus:ring-2  ">
                         </div>
@@ -82,7 +82,7 @@
             </form>
             <div>
                 <button class="text-white bg-orange-500 hover:bg-orange-600 text-bold rounded-full w-full px-5 py-2"
-                    wire:click="submit" @click="page = 'page-3'" @if ($email === '') disabled @endif> Next
+                     @click="page = 'page-3'" @if ($email === '') disabled @endif> Next
                 </button>
             </div>
         </section>
@@ -105,8 +105,8 @@
                         </svg>
                         <h1 class="text-4xl font-bold">Thank You !</h1>
                         <p>Thank you for your interest! Check your email for a link to the guide.</p>
-                        <a
-                            class="inline-flex items-center px-4 py-2 text-white bg-indigo-600 border border-indigo-600 rounded rounded-full hover:bg-indigo-700 focus:outline-none focus:ring">
+                        <a  @click="page = 'page-1'"
+                            class="inline-flex cursor-pointer items-center px-4 py-2 text-white bg-indigo-600 border border-indigo-600 rounded rounded-full hover:bg-indigo-700 focus:outline-none focus:ring">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 mr-2" fill="none"
                                 viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M7 16l-4-4m0 0l4-4m-4 4h18" />

@@ -13,20 +13,23 @@
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
         <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
+        {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
+        <link rel="stylesheet" href="{{ asset('build/assets/app-CXUjLN7Z.css') }}">
         @livewireStyles
     </head>
 
     <body class="font-sans text-gray-900 antialiased">
         <div
-            class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100 dark:bg-gray-900">
+            class="min-h-screen flex flex-col  items-center pt-6 sm:pt-0 ">
             <x-notification />
+            <x-header />
 
             <div
-                class="w-full sm:max-w-5xl mt-6 px-6 py-4 bg-white dark:bg-gray-800 shadow-md overflow-hidden sm:rounded-lg">
+                class="w-full sm:max-w-5xl mt-6 px-6 py-4 bg-white   overflow-hidden ">
                 {{ $slot }}
             </div>
         </div>
+        <script src="{{ asset('build/assets/app-Cv2dx58q.js') }}"></script>
         @livewireScripts
     </body>
 
