@@ -1,6 +1,6 @@
 <div>
     <div class=" text-gray-700" x-data="{ page: 'page-1', cleaningType: null, openTask: null }">
-        @include('layouts.navigation')
+        {{-- @include('layouts.navigation') --}}
 
         <section style="display: none" x-show="page === 'page-1'" class="px-3 md:px-10 space-y-7 py-10">
             <div class="flex justify-between space-x-3">
@@ -8,7 +8,7 @@
                 <div class="w-full bg-gray-400 rounded-full h-2 "></div>
                 <div class="w-full bg-gray-400 rounded-full h-2 "></div>
             </div>
-            <form class="max-w-sm mx-auto space-y-7">
+            <form class="max-w-5xl mx-auto space-y-7">
                 <h2 class="font-bold text-xl capitalize py-5">Enter email to continue</h2>
                 <div>
                     <label for="email-address-icon" class="block mb-2 text-sm font-medium text-gray-900 ">Your
@@ -25,7 +25,7 @@
                         </div>
                         <input type="email" id="email-address-icon" name="email" wire:model="email"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5   "
-                            placeholder="name@flowbite.com">
+                            placeholder="ibuchibasil@gmail.com">
                     </div>
                 </div>
                 <div>
@@ -43,13 +43,13 @@
                 <div class="w-full bg-cyan-800 rounded-full h-2 "></div>
                 <div class="w-full bg-gray-400 rounded-full h-2 "></div>
             </div>
-            <h2 class="font-bold text-xl capitalize">which service would you like to book</h2>
+            <h2 class="font-bold text-xl capitalize">which service would you like to book?</h2>
 
             @if (session()->has('error'))
                 <div class="alert alert-danger">
                     {{-- {{ session('error') }} --}}
-                    <p class="text-xs capitalize font-semibold text-red-400">you can select ont type of cleaning and
-                        extra task</p>
+                    <p class="text-xs font-semibold text-red-400">You can select ont type of cleaning and
+                        extra tasks</p>
                 </div>
             @endif
             <form class="space-y-1" wire:submit.prevent="submit" id="form">
@@ -60,8 +60,7 @@
                             wire:click="checkStatus('{{ $service->id }}', '{{ $service->type }}', '{{ $service->name }}');"
                             @click="cleaningType = @js($service->name)">
                             <label for="{{ $service->id }}"
-                                class="w-full py-4 ms-2 text-sm font-medium text-gray-900 ">{{ $service->name }} --
-                                {{ $service->type }}</label>
+                                class="w-full py-4 ms-2 text-sm font-medium text-gray-900 ">{{ $service->name }}</label>
                             <input id="{{ $service->id }}" type="checkbox" value="" name="cleaning"
                                 @if (in_array($service->id, array_column($selectedTypes, 'id'))) checked @endif
                                 class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-500 rounded focus:ring-blue-500  focus:ring-2  ">
@@ -70,23 +69,11 @@
                         <div class="pb-3 space-y-3 overflow-y-auto h-56 relative" style="display: none"
                             x-show="cleaningType === @js($service->name)">
                             <p class="text-xs font-bold text-orange-500 text-right pr-2 cursor-pointer "
-                                @click="cleaningType = 
+                                @click="cleaningType =
                         null">hide details</p>
 
                             <div class="space-y-3">
-                                <h4 class="font-bold text-md uppercase">Category title</h4>
-                                <ul class="list-disc px-5 space-y-2">
-                                    <li class="text-sm capitalize">dusting of furniture and sufaces</li>
-                                    <li class="text-sm capitalize">making bed</li>
-                                    <li class="text-sm capitalize">sweep and/or mobbing floor</li>
-                                    <li class="text-sm capitalize">dusting and wipping of skirtings</li>
-                                    <li class="text-sm capitalize">folding or hangging clothes on the bed or arounf
-                                        the
-                                        bedroom(
-                                        this does not include wardrobe or closet reorganization)</li>
-                                    <li class="text-sm capitalize">dusting of furniture and sufaces</li>
-                                    <li class="text-sm capitalize">dusting of furniture and sufaces</li>
-                                </ul>
+                                {!! $service->description !!}
                             </div>
 
                         </div>
